@@ -11,7 +11,7 @@ This exposes some properties of the TListView component, and further adds some n
 Building on **ListViewZaaz** this adds a TSpeedButton (FilterButton) with a TSkSVG component in the TSearchBar. It further exposes an event OnFilterButtonCLick that can be used when the user clicks the button.
 
 ## Authors
-Mark Richards [@TheCodeGugru](https://zaazapss.co.uk)
+Mark Richards [@TheCodeGugru](https://zaazapps.co.uk)
 
 ## Version History
 * 25.3.21.1 **Initial Repository Build**
