@@ -1,8 +1,5 @@
-# Aldwicks Essentials
-This is the repository for all the Delphi components I have created for use in the various application suites.
-
-![Screenshot of Stuff](aldwickscontrols.png)
-
+# Aldwicks Essential Components For Delphi 12.2
+This is the repository for all the Delphi components I have created for use in the various application suites under Delphi 12.2
 
 ## ComboEditZaaz
 This is exposes the CharCase property that for some reason is hidden in the base component TComboEdit
