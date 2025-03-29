@@ -164,6 +164,7 @@
         <DCCReference Include="ComboEditZaaz.pas"/>
         <DCCReference Include="ListViewZaaz.pas"/>
         <DCCReference Include="ListViewZaazFilter.pas"/>
+        <DCCReference Include="uSpdSvgButton.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
