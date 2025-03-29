@@ -42,7 +42,6 @@ requires
 contains
   ComboEditZaaz in 'ComboEditZaaz.pas',
   ListViewZaaz in 'ListViewZaaz.pas',
-  ListViewZaazFilter in 'ListViewZaazFilter.pas',
-  uSpdSvgButton in 'uSpdSvgButton.pas';
+  ListViewZaazFilter in 'ListViewZaazFilter.pas';
 
 end.

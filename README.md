@@ -10,10 +10,6 @@ This exposes some properties of the TListView component, and further adds some n
 ## ListViewZaazFilter
 Building on **ListViewZaaz** this adds a TSpeedButton (FilterButton) with a TSkSVG component in the TSearchBar. It further exposes an event OnFilterButtonCLick that can be used when the user clicks the button.
 
-## uSpdSvgButton
-This is a TSpeedButton with a TskSvg left aligned and a TLabel Cleint aligned that can be used to allow svg to be in the speed button. The TLabel part is used to ensure the speebutton.text is left blank and doesn interfere with the image
-The default image is a refresh, but can be changed. On important note: the control exposes the TagString changing this changes the TLabel.Text and vice-versa, useful little addition
-
 ## Authors
 Mark Richards [@TheCodeGugru](https://zaazapps.co.uk)
 
