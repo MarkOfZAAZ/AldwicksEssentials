@@ -1,5 +1,9 @@
-# Aldwicks Essential Components For Delphi 12.2
+# Aldwicks Essential Components For Delphi 13.1
 This is the repository for all the Delphi components I have created for use in the various application suites under Delphi 12.2
+
+## SpeedButtonsZaaz (June 2026)
+I have designed a set of TSpeedButton derived components, which have the TSkSvg icon inside them to make it easier to add just the button to the UI, rather than having to add the button then add the SVG tehn set the HitTest := False; etc
+
 
 ## ComboEditZaaz
 This is exposes the CharCase property that for some reason is hidden in the base component TComboEdit
