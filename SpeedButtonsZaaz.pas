@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------------------------------------
 // Copyright © 1994 - 2026 Aldwicks Limited
 //
-// Last changed: 03.06.2026 18:04
+// Last changed: 10.06.2026 13:26
 // -----------------------------------------------------------------------------
 
 unit SpeedButtonsZaaz;
@@ -220,15 +220,16 @@ const
   '''
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="10" fill="circlecolor"/>
-      <g transform="translate(3.2,3.2) scale(0.38)">
-        <path d="M10 20h28c2 0 3 1 3 3v14c0 2-1 3-3 3H10c-2 0-3-1-3-3V23c0-2 1-3 3-3z" fill="#5FA4E0"/>
+      <g transform="translate(1.7,1.0) scale(0.427)">
+        <path d="M10 20h28c2 0 3 1 3 3v14c0 2-1 3-3 3H10c-2 0-3-1-3-3V23c0-2 1-3 3-3z"
+              fill="#5FA4E0"/>
         <rect x="14" y="30" width="20" height="12" rx="1.5" fill="#87CEFA"/>
         <rect x="14" y="10" width="20" height="10" rx="1.5" fill="#87CEFA"/>
         <rect x="18" y="26" width="12" height="2.5" rx="1" fill="#324A5E"/>
-        <!-- Status light -->
-        <circle cx="34" cy="24" r="2" fill="#324A5E"/>
+        <circle cx="9" cy="38" r="0.85" fill="#E25563"/>
       </g>
     </svg>
+
   ''';
 
 type
@@ -321,6 +322,7 @@ begin
   RegisterComponents('AldwicksSpeedButtons', [TSpeedRefresh]);
   RegisterComponents('AldwicksSpeedButtons', [TSpeedSelect]);
   RegisterComponents('AldwicksSpeedButtons', [TSpeedCancel]);
+  RegisterComponents('AldwicksSpeedButtons', [TSpeedPrint]);
 end;
 
 function CircleColorToHex(const AColor: TCircleColor): string;
