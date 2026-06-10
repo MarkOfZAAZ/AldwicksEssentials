@@ -215,6 +215,22 @@ const
     </svg>
   ''';
 
+const
+  ICON_PRINT: string =
+  '''
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" fill="circlecolor"/>
+      <g transform="translate(3.2,3.2) scale(0.38)">
+        <path d="M10 20h28c2 0 3 1 3 3v14c0 2-1 3-3 3H10c-2 0-3-1-3-3V23c0-2 1-3 3-3z" fill="#5FA4E0"/>
+        <rect x="14" y="30" width="20" height="12" rx="1.5" fill="#87CEFA"/>
+        <rect x="14" y="10" width="20" height="10" rx="1.5" fill="#87CEFA"/>
+        <rect x="18" y="26" width="12" height="2.5" rx="1" fill="#324A5E"/>
+        <!-- Status light -->
+        <circle cx="34" cy="24" r="2" fill="#324A5E"/>
+      </g>
+    </svg>
+  ''';
+
 type
   TSpeedCircleButtonBase = class(TSpeedButton)
   private
@@ -232,6 +248,12 @@ type
 
 type
   TSpeedAdd = class(TSpeedCircleButtonBase)
+  public
+    constructor Create(AOwner: TComponent); override;
+  end;
+
+type
+  TSpeedPrint = class(TSpeedCircleButtonBase)
   public
     constructor Create(AOwner: TComponent); override;
   end;
@@ -430,6 +452,14 @@ constructor TSpeedCancel.Create(AOwner: TComponent);
 begin
   inherited;
   InitButton(ICON_CANCEL, 'Cancel and return to previous page...', TAlignLayout.MostRight);
+end;
+
+{ TSpeedPrint }
+
+constructor TSpeedPrint.Create(AOwner: TComponent);
+begin
+  inherited;
+  InitButton(ICON_PRINT, 'Print (preview) the current HTML..', TAlignLayout.MostRight);
 end;
 
 end.
