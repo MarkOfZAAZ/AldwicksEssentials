@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------------------------------------
 // Copyright © 1994 - 2026 Aldwicks Limited
 //
-// Last changed: 10.06.2026 13:26
+// Last changed: 11.06.2026 15:14
 // -----------------------------------------------------------------------------
 
 unit SpeedButtonsZaaz;
@@ -88,6 +88,37 @@ const
         <path d="M46 35c0 6.075-4.925 11-11 11s-11-4.925-11-11 4.925-11 11-11 11 4.925 11 11zm-10-7a1 1 0 1 0-2 0v6h-6a1 1 0 1 0 0 2h6v6a1 1 0 1 0 2 0v-6h6a1 1 0 1 0 0-2h-6v-6z"
           fill="#87CEFA"/>
       </g>
+    </svg>
+  ''';
+
+const
+  ICON_ASSIGN: string =
+  '''
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" fill="circlecolor"/>
+      <g transform="matrix(0.40632534,0,0,0.46387567,2.2522897,2.3439308)">
+        <rect x="22" y="8" width="20" height="26" rx="2" ry="2" fill="#87CEFA"/>
+        <rect x="25" y="13" width="10" height="2.5" rx="1" fill="#5FA4E0"/>
+        <rect x="25" y="19" width="10" height="2.5" rx="1" fill="#5FA4E0"/>
+        <rect x="25" y="25" width="6"  height="2.5" rx="1" fill="#5FA4E0"/>
+        <path d="M4,21 H18" stroke="#5FA4E0" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+        <polygon points="16,15 26,21 16,27" fill="#5FA4E0"/>
+      </g>
+    </svg>
+  ''';
+
+const
+  ICON_COPY: string =
+  '''
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="10" fill="circlecolor"/>
+    <g transform="translate(4.5,5.0) scale(0.35)">
+      <rect x="12" y="1" width="24" height="30" rx="2" ry="2" fill="#5FA4E0"/>
+      <rect x="5" y="9" width="24" height="30" rx="2" ry="2" fill="#87CEFA"/>
+      <rect x="10" y="15" width="14" height="2.5" rx="1" fill="#5FA4E0"/>
+      <rect x="10" y="21" width="14" height="2.5" rx="1" fill="#5FA4E0"/>
+      <rect x="10" y="27" width="9"  height="2.5" rx="1" fill="#5FA4E0"/>
+    </g>
     </svg>
   ''';
 
@@ -254,6 +285,12 @@ type
   end;
 
 type
+  TSpeedAssign = class(TSpeedCircleButtonBase)
+  public
+    constructor Create(AOwner: TComponent); override;
+  end;
+
+type
   TSpeedPrint = class(TSpeedCircleButtonBase)
   public
     constructor Create(AOwner: TComponent); override;
@@ -307,6 +344,12 @@ type
     constructor Create(AOwner: TComponent); override;
   end;
 
+type
+  TSpeedCopy = class(TSpeedCircleButtonBase)
+  public
+    constructor Create(AOwner: TComponent); override;
+  end;
+
 procedure Register;
 
 implementation
@@ -323,6 +366,8 @@ begin
   RegisterComponents('AldwicksSpeedButtons', [TSpeedSelect]);
   RegisterComponents('AldwicksSpeedButtons', [TSpeedCancel]);
   RegisterComponents('AldwicksSpeedButtons', [TSpeedPrint]);
+  RegisterComponents('AldwicksSpeedButtons', [TSpeedAssign]);
+  RegisterComponents('AldwicksSpeedButtons', [TSpeedCopy]);
 end;
 
 function CircleColorToHex(const AColor: TCircleColor): string;
@@ -462,6 +507,22 @@ constructor TSpeedPrint.Create(AOwner: TComponent);
 begin
   inherited;
   InitButton(ICON_PRINT, 'Print (preview) the current HTML..', TAlignLayout.MostRight);
+end;
+
+{ TSpeedAssign }
+
+constructor TSpeedAssign.Create(AOwner: TComponent);
+begin
+  inherited;
+  InitButton(ICON_ASSIGN, 'Assign to...', TAlignLayout.MostRight);
+end;
+
+{ TSpeedCopy }
+
+constructor TSpeedCopy.Create(AOwner: TComponent);
+begin
+  inherited;
+  InitButton(ICON_COPY, 'Copy item...', TAlignLayout.MostRight);
 end;
 
 end.
