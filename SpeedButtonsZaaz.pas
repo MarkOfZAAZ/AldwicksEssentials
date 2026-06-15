@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------------------------------------
 // Copyright © 1994 - 2026 Aldwicks Limited
 //
-// Last changed: 11.06.2026 15:14
+// Last changed: 15.06.2026 13:03
 // -----------------------------------------------------------------------------
 
 unit SpeedButtonsZaaz;
@@ -11,55 +11,6 @@ interface
 uses
   System.SysUtils, System.Classes, System.Skia, System.StrUtils,
   FMX.Types, FMX.Controls, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Memo, FMX.Skia;
-
-
-(*
-
-🔥 Burnt Orange Palette (Delphi‑friendly hex values)
-Primary Burnt Orange
-The canonical, balanced version:
-
-#CC5500
-
-This is your “base” orange, equivalent to how #5FA4E0 is your base blue.
-
-Highlight / Light Burnt Orange
-For facets, highlights, or two‑tone icons:
-
-#FF7A1A
-
-This is the orange equivalent of your #87CEFA highlight blue — brighter, lighter, but still warm.
-
-Dark Burnt Orange
-For shadows, depth, or dual‑tone shading:
-
-#993F00
-
-This is the orange equivalent of your darker blue #324A5E accents.
-
-Deep Burnt Sienna Accent
-Useful for outlines, contrast strokes, or “pressed” states:
-
-#7A2E00
-
-This is the orange analogue of your charcoal tones.
-
-Soft Muted Orange (Greyscale‑friendly)
-For disabled states or low‑contrast UI:
-
-#E6A67A
-
-This desaturated orange converts cleanly to greyscale without turning muddy.
-
-🎨 Full Palette Summary
-Purpose	Hex	Notes
-Primary Burnt Orange	#CC5500	Your main orange
-Highlight Orange	#FF7A1A	For facets / lighter areas
-Dark Orange	#993F00	For shadows / depth
-Deep Accent	#7A2E00	Outlines / pressed states
-Muted Orange	#E6A67A	Disabled / greyscale‑friendly
-
-*)
 
 type
   TCircleColor = (ccDark, ccDarker, ccDarkest, ccCharcoal, ccLight, ccGreyscale, ccGreyLight, ccWarning);
@@ -76,6 +27,43 @@ const
   CC_WARNING: string = '#CC5500';
 
 const
+  ICON_CONFIG: string =
+  '''
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" fill="circlecolor"/>
+      <g transform="translate(12,12)">
+        <!-- Gear teeth -->
+        <rect x="-1.1" y="-7.6" width="2.2" height="2.8" rx="0.6" fill="#5FA4E0"/>
+        <rect x="-1.1" y="-7.6" width="2.2" height="2.8" rx="0.6" fill="#5FA4E0" transform="rotate(45)"/>
+        <rect x="-1.1" y="-7.6" width="2.2" height="2.8" rx="0.6" fill="#5FA4E0" transform="rotate(90)"/>
+        <rect x="-1.1" y="-7.6" width="2.2" height="2.8" rx="0.6" fill="#5FA4E0" transform="rotate(135)"/>
+        <rect x="-1.1" y="-7.6" width="2.2" height="2.8" rx="0.6" fill="#5FA4E0" transform="rotate(180)"/>
+        <rect x="-1.1" y="-7.6" width="2.2" height="2.8" rx="0.6" fill="#5FA4E0" transform="rotate(225)"/>
+        <rect x="-1.1" y="-7.6" width="2.2" height="2.8" rx="0.6" fill="#5FA4E0" transform="rotate(270)"/>
+        <rect x="-1.1" y="-7.6" width="2.2" height="2.8" rx="0.6" fill="#5FA4E0" transform="rotate(315)"/>
+        <!-- Gear body -->
+        <circle cx="0" cy="0" r="5" fill="#5FA4E0"/>
+        <!-- Centre hole -->
+        <circle cx="0" cy="0" r="2.2" fill="#324A5E"/>
+        <!-- Accent ring -->
+        <circle cx="0" cy="0" r="2.2" fill="none" stroke="#87CEFA" stroke-width="0.9"/>
+      </g>
+    </svg>
+  ''';
+
+  ICON_FILTER: string =
+  '''
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" fill="circlecolor"/>
+      <line x1="6" y1="9" x2="18" y2="9" stroke="#5FA4E0" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="14" cy="9" r="1.8" fill="#87CEFA"/>
+      <line x1="6" y1="12" x2="18" y2="12" stroke="#5FA4E0" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="10" cy="12" r="1.8" fill="#87CEFA"/>
+      <line x1="6" y1="15" x2="18" y2="15" stroke="#5FA4E0" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="13" cy="15" r="1.8" fill="#87CEFA"/>
+    </svg>
+  ''';
+
   ICON_ADD: string =
   '''
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +79,6 @@ const
     </svg>
   ''';
 
-const
   ICON_ASSIGN: string =
   '''
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -107,7 +94,6 @@ const
     </svg>
   ''';
 
-const
   ICON_COPY: string =
   '''
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -122,7 +108,6 @@ const
     </svg>
   ''';
 
-const
   ICON_APPLY: string =
   '''
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -138,7 +123,6 @@ const
     </svg>
   ''';
 
-const
   ICON_ADD_ALTERNATE: string =
   '''
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -154,7 +138,6 @@ const
     </svg>
   ''';
 
-const
   ICON_BACK: string =
   '''
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -166,7 +149,6 @@ const
     </svg>
   ''';
 
-const
   ICON_HOME: string =
   '''
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -178,7 +160,6 @@ const
     </svg>
   ''';
 
-const
   ICON_MENU: string =
   '''
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -189,7 +170,6 @@ const
     </svg>
   ''';
 
-const
   ICON_REFRESH: string =
   '''
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -199,7 +179,6 @@ const
     </svg>
   ''';
 
-const
   ICON_SELECT: string =
   '''
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -210,7 +189,6 @@ const
     </svg>
   ''';
 
-const
   ICON_CANCEL: string =
   '''
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -246,7 +224,6 @@ const
     </svg>
   ''';
 
-const
   ICON_PRINT: string =
   '''
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -278,8 +255,21 @@ type
     property CircleColour: TCircleColor read FCircleColor write SetCircleColor default ccDark;
   end;
 
+
+type
+  TSpeedConfig = class(TSpeedCircleButtonBase)
+  public
+    constructor Create(AOwner: TComponent); override;
+  end;
+
 type
   TSpeedAdd = class(TSpeedCircleButtonBase)
+  public
+    constructor Create(AOwner: TComponent); override;
+  end;
+
+type
+  TSpeedFilter = class(TSpeedCircleButtonBase)
   public
     constructor Create(AOwner: TComponent); override;
   end;
@@ -368,6 +358,8 @@ begin
   RegisterComponents('AldwicksSpeedButtons', [TSpeedPrint]);
   RegisterComponents('AldwicksSpeedButtons', [TSpeedAssign]);
   RegisterComponents('AldwicksSpeedButtons', [TSpeedCopy]);
+  RegisterComponents('AldwicksSpeedButtons', [TSpeedFilter]);
+  RegisterComponents('AldwicksSpeedButtons', [TSpeedConfig]);
 end;
 
 function CircleColorToHex(const AColor: TCircleColor): string;
@@ -523,6 +515,22 @@ constructor TSpeedCopy.Create(AOwner: TComponent);
 begin
   inherited;
   InitButton(ICON_COPY, 'Copy item...', TAlignLayout.MostRight);
+end;
+
+{ TSpeedFilter }
+
+constructor TSpeedFilter.Create(AOwner: TComponent);
+begin
+  inherited;
+  InitButton(ICON_FILTER, 'Filter options...', TAlignLayout.MostRight);
+end;
+
+{ TSpeedConfig }
+
+constructor TSpeedConfig.Create(AOwner: TComponent);
+begin
+  inherited;
+  InitButton(ICON_CONFIG, 'Configuration...', TAlignLayout.MostRight);
 end;
 
 end.
