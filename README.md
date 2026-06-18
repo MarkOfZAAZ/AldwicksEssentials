@@ -1,8 +1,8 @@
 # Aldwicks Essential Components For Delphi 13.1
 This is the repository for all the Delphi components I have created for use in the various application suites under Delphi 12.2
 
-## Database Query Helpers
-Helper for Devart TMyQuery components and FireDAC TFDQuery components to check field value uniqueness
+## Database Query Helpers (June 2026)
+Helpers for Devart TMyQuery components and FireDAC TFDQuery components to check field value uniqueness
 in a MySQL or  SQLite table, with optional exclusion of a known row (e.g. on update).
 
 ## SpeedButtonsZaaz (June 2026)
