@@ -1,4 +1,10 @@
-﻿unit SpeedButtonsZaaz;
+﻿// -----------------------------------------------------------------------------
+// Copyright © 1994 - 2026 Aldwicks Limited
+//
+// 🛠 Last changed: 21.06.2026 16:07
+// -----------------------------------------------------------------------------
+
+unit SpeedButtonsZaaz;
 
 interface
 
@@ -9,8 +15,8 @@ uses
 
 type
   TCircleColor = (
-    ccDark,      // your standard steel blue - the main brand colour
     ccDefault,
+    ccDark,         // standard steel blue - the main brand colour
     ccNavy,         // darker blue, still in the blue family
     ccSlate,        // blue-grey, subtle alternative to default
     ccCharcoal,     // dark neutral for contrast-heavy contexts
@@ -26,7 +32,6 @@ type
 
 const
   CC_DEFAULT:  string = '#324A5E'; // steel blue - your brand default
-  CC_DARK:     string = '#324A5E'; // steel blue - your brand default
   CC_NAVY:     string = '#1B2A3B'; // deep navy
   CC_SLATE:    string = '#4A6274'; // lighter blue-grey
   CC_CHARCOAL: string = '#2D3A3A'; // very dark teal-grey
@@ -39,8 +44,8 @@ const
   CC_PURPLE:   string = '#4A3570'; // deep purple, special functions
   CC_ROSE:     string = '#8B3A52'; // muted rose, soft warning
 
-  const
-    COLOR_TOKEN = '{{CIRCLE_COLOR}}';
+const
+  COLOR_TOKEN = '{{CIRCLE_COLOR}}';
 
   type
     TSpeedCircleButtonBase = class(TSpeedButton)
@@ -49,6 +54,7 @@ const
       FCircleColor: TCircleColor;
       FIconSvg: string;
       procedure SetCircleColor(const Value: TCircleColor);
+      procedure ApplySvgRecolour;
     protected
       procedure InitButton(const ASvg: string; const AHint: string; AAlign: TAlignLayout);
     public
@@ -172,24 +178,25 @@ implementation
 
 procedure Register;
 begin
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedAdd]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedAddAlt]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedApply]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedAssign]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedBack]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedCamera]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedCancel]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedConfig]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedCopy]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedDelete]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedFilter]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedHome]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedMenu]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedPicture]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedPrint]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedRefresh]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedSelect]);
-  RegisterComponents('AldwicksSpeedButtons', [TSpeedSort]);
+  RegisterComponents('AldwicksSpeedButtons',
+    [TSpeedAdd,
+     TSpeedAddAlt,
+     TSpeedApply,
+     TSpeedAssign,
+     TSpeedBack,
+     TSpeedCamera,
+     TSpeedCancel,
+     TSpeedConfig,
+     TSpeedCopy,
+     TSpeedDelete,
+     TSpeedFilter,
+     TSpeedHome,
+     TSpeedMenu,
+     TSpeedPicture,
+     TSpeedPrint,
+     TSpeedRefresh,
+     TSpeedSelect,
+     TSpeedSort]);
 end;
 
 function CircleColorToHex(const AColor: TCircleColor): string;
@@ -239,13 +246,25 @@ begin
   FCircleColor := ccDefault;
 end;
 
+procedure TSpeedCircleButtonBase.ApplySvgRecolour;
+begin
+  // Nothing to recolour until InitButton has run (e.g. during streaming /
+  // property-load order at design time). Avoid ReplaceStr on an empty source.
+  if FIconSvg = '' then
+    Exit;
+
+  FSvg.Svg.GrayScale := IsGreyscale(FCircleColor);
+  FSvg.Svg.Source    := ReplaceStr(FIconSvg, COLOR_TOKEN, CircleColorToHex(FCircleColor));
+end;
+
 procedure TSpeedCircleButtonBase.InitButton(const ASvg, AHint: string; AAlign: TAlignLayout);
 begin
   FIconSvg := ASvg;
   Hint     := AHint;
   Align    := AAlign;
-  FSvg.Svg.GrayScale := IsGreyscale(FCircleColor);
-  FSvg.Svg.Source    := ReplaceStr(FIconSvg, COLOR_TOKEN, CircleColorToHex(FCircleColor));
+  ApplySvgRecolour;
+//  FSvg.Svg.GrayScale := IsGreyscale(FCircleColor);
+//  FSvg.Svg.Source    := ReplaceStr(FIconSvg, COLOR_TOKEN, CircleColorToHex(FCircleColor));
 end;
 
 procedure TSpeedCircleButtonBase.SetCircleColor(const Value: TCircleColor);
@@ -253,8 +272,9 @@ begin
   if FCircleColor = Value
     then Exit; // guard against no-op
   FCircleColor := Value;
-  FSvg.Svg.GrayScale := IsGreyscale(Value);
-  FSvg.Svg.Source    := ReplaceStr(FIconSvg, COLOR_TOKEN, CircleColorToHex(Value));
+  ApplySvgRecolour;
+//  FSvg.Svg.GrayScale := IsGreyscale(Value);
+//  FSvg.Svg.Source    := ReplaceStr(FIconSvg, COLOR_TOKEN, CircleColorToHex(Value));
 end;
 
 { TSpeedAddNew }
