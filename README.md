@@ -8,7 +8,6 @@ in a MySQL or  SQLite table, with optional exclusion of a known row (e.g. on upd
 ## SpeedButtonsZaaz (June 2026)
 I have designed a set of TSpeedButton derived components, which have the TSkSvg icon inside them to make it easier to add just the button to the UI, rather than having to add the button then add the SVG tehn set the HitTest := False; etc
 
-
 ## ComboEditZaaz
 This is exposes the CharCase property that for some reason is hidden in the base component TComboEdit
 
@@ -17,6 +16,20 @@ This exposes some properties of the TListView component, and further adds some n
 
 ## ListViewZaazFilter
 Building on **ListViewZaaz** this adds a TSpeedButton (FilterButton) with a TSkSVG component in the TSearchBar. It further exposes an event OnFilterButtonCLick that can be used when the user clicks the button.
+
+## uTabControlHelper.pas (June 2026)
+The idea here is to simplfy async tab movement, saves lots of typing!
+```pascal
+   type
+      TTabControlHelper = class helper for TTabControl
+      public
+         // Changed so can choose to show the slide (default) or not
+         procedure TabLeft(TargetTab: TTabItem; Slide: boolean = true);
+         // Replaces something as complex as TAbControl1.SetActiveTabWithTransitionAsync(TTabItem, TTabTransition.Slide, TabTransitionDirection.Reversed, nil);
+         procedure TabRight(TargetTab: TTabItem; Slide: boolean = true);
+         // Replaces something as complex as TAbControl1.SetActiveTabWithTransitionAsync(TTabItem, TTabTransition.Slide, TTabTransitionDirection.Normal, nil);
+      end;
+```
 
 ## Authors
 Mark Richards [@TheCodeGugru](https://zaazapps.co.uk)

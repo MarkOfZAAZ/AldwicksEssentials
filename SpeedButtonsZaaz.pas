@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------------------------------------
 // Copyright © 1994 - 2026 Aldwicks Limited
 //
-// 🛠 Last changed: 21.06.2026 16:07
+// 🛠 Last changed: 22.06.2026 16:51
 // -----------------------------------------------------------------------------
 
 unit SpeedButtonsZaaz;
@@ -263,8 +263,6 @@ begin
   Hint     := AHint;
   Align    := AAlign;
   ApplySvgRecolour;
-//  FSvg.Svg.GrayScale := IsGreyscale(FCircleColor);
-//  FSvg.Svg.Source    := ReplaceStr(FIconSvg, COLOR_TOKEN, CircleColorToHex(FCircleColor));
 end;
 
 procedure TSpeedCircleButtonBase.SetCircleColor(const Value: TCircleColor);
@@ -273,8 +271,6 @@ begin
     then Exit; // guard against no-op
   FCircleColor := Value;
   ApplySvgRecolour;
-//  FSvg.Svg.GrayScale := IsGreyscale(Value);
-//  FSvg.Svg.Source    := ReplaceStr(FIconSvg, COLOR_TOKEN, CircleColorToHex(Value));
 end;
 
 { TSpeedAddNew }
@@ -498,7 +494,7 @@ const
   ''';
 begin
   inherited;
-  InitButton(ICON_PRINT, 'Print (preview) the current HTML..', TAlignLayout.MostRight);
+  InitButton(ICON_PRINT, 'Preview the report..', TAlignLayout.MostRight);
 end;
 
 { TSpeedAssign }
@@ -640,7 +636,7 @@ const
   ''';
 begin
   inherited;
-  InitButton(ICON_DELETE, 'Delete select item...', TAlignLayout.Right);
+  InitButton(ICON_DELETE, 'Delete selected item...', TAlignLayout.Right);
 end;
 
 { TSpeedCamera }
